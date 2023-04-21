@@ -24,23 +24,23 @@ API_FUNCTIONS = {
     "UserLeaderboard": "GetUserLeaderboard",
 }
 
-def request(url):
+def request_get(url):
     response = requests.get(url)
     if response.status_code in API_REQUEST_TIMEOUT_CODES:
         print(f"{response.status_code}:{response.reason}")
         time.sleep(API_REQUEST_TIMEOUT_SLEEP)
-        return request(url)
+        return request_get(url)
     return response
 
 def request_function(function_name):
     url = create_api_url(function_name)
-    return request(url).json()
+    return request_get(url).json()
 
 def request_function_with_data(function_name, data):
     data['vary'] = utils.get_current_unix_time()
     header = utils.encode_b64_header(data)
     url = create_api_url(function_name, header=header)
-    return request(url).json()
+    return request_get(url).json()
 
 def create_api_url(function_name, header=None):
     if header is None:
