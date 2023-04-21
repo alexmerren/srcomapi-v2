@@ -38,12 +38,11 @@ def request_function(function_name):
 def request_function_with_data(function_name, data):
     data['vary'] = utils.get_current_unix_time()
     header = utils.encode_b64_header(data)
-    url = create_api_url_with_header(function_name, header)
+    url = create_api_url(function_name, header=header)
     return requests.get(url).json()
 
-def create_api_url(function_name):
-    return f"{API_URL}{API_FUNCTIONS[function_name]}"
-
-def create_api_url_with_header(function_name, header):
+def create_api_url(function_name, header=None):
+    if header is None:
+        return f"{API_URL}{API_FUNCTIONS[function_name]}"
     return f"{API_URL}{API_FUNCTIONS[function_name]}{API_REQUEST_QUERY}{header}"
 

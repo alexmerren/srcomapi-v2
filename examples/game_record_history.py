@@ -5,8 +5,8 @@ def main():
     game_data = api.get_game_data(gameId)
     categories = [category['id'] for category in game_data['categories']]
     categoryId = categories[0]
-    record_history = api.get_game_category_record_history(gameId, categoryId)
-    print(record_history)
+    leaderboard_data = api.get_game_category_leaderboard(gameId, categoryId)
+    print(leaderboard_data)
 
 if __name__ == "__main__":
     main()
