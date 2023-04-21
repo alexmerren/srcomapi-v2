@@ -1,12 +1,12 @@
 import srcomapiv2 as api
 
 def main():
-    gameId = "k6qg0xdg"
-    game_data = api.get_game_data(gameId)
+    game_id = "k6qg0xdg"
+    game_data = api.get_game_data(game_id)
     categories = [category['id'] for category in game_data['categories']]
-    categoryId = categories[0]
-    record_history = api.get_game_category_record_history(gameId, categoryId)
-    print(record_history)
+    category_id = categories[0]
+    leaderboard_data = api.get_game_category_leaderboard(game_id, category_id)
+    print(leaderboard_data)
 
 if __name__ == "__main__":
     main()

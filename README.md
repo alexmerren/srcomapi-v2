@@ -1,4 +1,4 @@
-# Speedrun.com V2 API Reverse Engineering
+# Speedrun.com V2 API for Python
 
 I am trying to reverse engineer the unreleased v2 speedrun.com API. I hope this isn't illegal!
 

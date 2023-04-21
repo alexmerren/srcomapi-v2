@@ -10,38 +10,37 @@ __all__ = [
     "get_game_list",
 ]
 
-def get_user_data(userId, data=None):
-    if data == None: 
+def get_user_data(user_id, data=None):
+    if data is not None:
         data = {
-            "userId": userId,
+            "userId": user_id,
             "levelType": 1,
         }
     return requests.request_function_with_data('UserLeaderboard', data)
 
-def get_game_list(data=None):
-    # The data here is useless, it maintains style with the other functions.
+def get_game_list():
     return requests.request_function('GameList')
 
-def get_game_data(gameId, data=None):
-    if data == None: 
+def get_game_data(game_id, data=None):
+    if data is None:
         data = {
-            'gameId': gameId,
+            'gameId': game_id,
         }
     return requests.request_function_with_data('GameData', data)
 
-def get_game_summary(gameUrl, data=None):
-    if data == None: 
+def get_game_summary(game_url, data=None):
+    if data is None:
         data = {
-            "gameUrl": gameUrl,
+            "gameUrl": game_url,
         }
     return requests.request_function_with_data('GameSummary', data)
 
-def get_game_category_leaderboard(gameId, categoryId, data=None):
-    if data == None:
+def get_game_category_leaderboard(game_id, category_id, page_number=1, data=None):
+    if data is None:
         data = {
             "params": {
-                "gameId": gameId,
-                "categoryId": categoryId,
+                "gameId": game_id,
+                "categoryId": category_id,
                 "values": [],
                 "timer":0,
                 "regionIds":[],
@@ -49,24 +48,24 @@ def get_game_category_leaderboard(gameId, categoryId, data=None):
                 "video":0,
                 "obsolete":0
             },
-            "page":1,
+            "page": page_number,
         }
     return requests.request_function_with_data('GameLeaderboard', data)
 
-def get_game_category_record_history(gameId, categoryId, data=None):
-    if data == None:
+def get_game_category_record_history(game_id, category_id, data=None):
+    if data is None:
         data = {
             "params": {
-                "gameId": gameId,
-                "categoryId": categoryId,
+                "gameId": game_id,
+                "categoryId": category_id,
             },
         }
     return requests.request_function_with_data('GameRecordHistory', data)
 
-def get_game_latest_leaderboard(gameId, limit, data=None):
-    if data == None:
+def get_game_latest_leaderboard(game_id, limit, data=None):
+    if data is None:
         data = {
-            "gameId": gameId,
-            "limit": limit
+            "gameId": game_id,
+            "limit": limit,
         }
     return requests.request_function_with_data('GameLatestLeaderboard', data)
