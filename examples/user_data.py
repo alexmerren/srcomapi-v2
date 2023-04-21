@@ -1,8 +1,8 @@
 import srcomapiv2 as api
 
 def main():
-    userId = "zxznzp0x"
-    user_data = api.get_user_data(userId)
+    user_id = "zxznzp0x"
+    user_data = api.get_user_data(user_id)
     print(user_data)
     
 if __name__ == "__main__":
