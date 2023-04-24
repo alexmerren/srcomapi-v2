@@ -17,8 +17,12 @@ def get_user_data(user_id, data=None):
         }
     return requests.request_function_with_data(requests.USER_DATA, data)
 
-def get_game_list():
-    return requests.request_function('GameList')
+def get_game_list(page_number=1, data=None):
+    if data is None:
+        data = {
+            "page": page_number,
+        }
+    return requests.request_function_with_data(requests.GAME_LIST, data)
 
 def get_game_data(game_id, data=None):
     if data is None:
