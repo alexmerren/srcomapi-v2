@@ -39,6 +39,11 @@ API_FUNCTIONS = {
     USER_DATA: "GetUserLeaderboard",
 }
 
+
+def request_function(function_name):
+    url = create_api_url(function_name)
+    return request_get(url).json()
+
 def request_function_with_data(function_name, data, **kwargs):
     data['vary'] = utils.get_current_unix_time()
     header = utils.encode_b64_header(data)
@@ -51,12 +56,12 @@ def request_function_with_data(function_name, data, **kwargs):
     return request_get(url, **kwargs).json()
 
 def request_get(url, **kwargs):
-    response = requests.get(url, **kwargs)
-    print(url)
+    response = requests.get(url, kwargs)
     if response.status_code in REQUEST_TIMEOUT_CODES:
         print(f"{response.status_code}:{response.reason}")
         time.sleep(REQUEST_TIMEOUT_SLEEP)
         return request_get(url)
+    print(url)
     return response
 
 def create_api_url(function_name, header=None):
