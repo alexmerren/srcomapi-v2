@@ -1,8 +1,5 @@
 import requests
 import time
-import srcomapiv2
-
-from os.path import dirname
 from srcomapiv2 import utils
 
 __all__ = [
@@ -15,8 +12,7 @@ __all__ = [
     "USER_DATA",
 ]
 
-with open(f"{dirname(srcomapiv2.__file__)}/.version", 'r', encoding='utf-8') as openfile:
-    __version__ = openfile.read().strip()
+__version__ = "0.1.0"
 
 API_URL = "https://www.speedrun.com/api/v2/"
 REQUEST_TIMEOUT_SLEEP = 2
