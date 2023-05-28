@@ -67,12 +67,10 @@ def get_game_category_variable_value_leaderboard(game_id="", category_id="", var
             "params": {
                 "gameId": game_id,
                 "categoryId": category_id,
-                "values": [
-                    {
-                        "variableId": variable_id, 
-                         "valueIds": [value_id]
-                    },
-                ],
+                "values": [{
+                    "variableId": variable_id,
+                     "valueIds": [value_id]
+                }],
                 "timer":0,
                 "regionIds":[],
                 "platformIds":[],
