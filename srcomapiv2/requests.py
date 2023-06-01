@@ -17,7 +17,7 @@ __version__ = "0.1.0"
 API_URL = "https://www.speedrun.com/api/v2/"
 REQUEST_USER_AGENT = "alem:srcomapiv2"
 
-REQUEST_TIMEOUT_SLEEP = 2
+REQUEST_TIMEOUT_SLEEP = 5 
 REQUEST_TIMEOUT_CODES = [429, 503, 504]
 
 GAME_LIST = "GameList"
@@ -42,26 +42,28 @@ def request_function(function_name):
 
     return request_get(url).json()
 
-def request_function_with_data(function_name, data, **kwargs):
+def request_function_with_data(function_name, data):
     data['vary'] = utils.get_current_unix_time()
     header = utils.encode_b64_header(data)
     url = create_api_url(function_name, header=header)
-    kwargs.update({
+
+    return request_get(url).json()
+
+def request_get(url):
+    response = requests.get(url, {
         "headers": {
             "User-Agent": f"{REQUEST_USER_AGENT}/{__version__}",
         },
     })
 
-    return request_get(url, **kwargs).json()
-
-def request_get(url, **kwargs):
-    response = requests.get(url, kwargs)
-
     if response.status_code in REQUEST_TIMEOUT_CODES:
         print(f"{response.status_code}:{response.reason}")
+        print(response.raw)
         time.sleep(REQUEST_TIMEOUT_SLEEP)
 
         return request_get(url)
+
+    print(url)
 
     return response
 
